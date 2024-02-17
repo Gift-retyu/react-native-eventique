@@ -1,6 +1,6 @@
 {
   "name": "react-native-eventique",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "listen to db changes without polling",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
