@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
+import android.provider.Settings;
 
 @ReactModule(name = EventiqueModule.NAME)
 public class EventiqueModule extends ReactContextBaseJavaModule {
@@ -66,10 +67,17 @@ public class EventiqueModule extends ReactContextBaseJavaModule {
       "clientId",
       "default_clientId"
     );
-    String topicUuid = eventiqueProperties.getProperty(
-      "topic",
-      "default_topic"
-    );
+    String appName = getReactApplicationContext()
+      .getApplicationInfo()
+      .loadLabel(getReactApplicationContext().getPackageManager())
+      .toString();
+
+  String deviceId = Settings.Secure.getString(
+    getReactApplicationContext().getContentResolver(),
+    Settings.Secure.ANDROID_ID
+  );
+
+  String topicUuid = deviceId;
 
     if (apiKey != null && !apiKey.isEmpty()) {
       String credentialsUrl = "https://fetch-my-creds.com";
@@ -118,10 +126,6 @@ public class EventiqueModule extends ReactContextBaseJavaModule {
         .applySimpleAuth()
         .send();
 
-      String appName = getReactApplicationContext()
-        .getApplicationInfo()
-        .loadLabel(getReactApplicationContext().getPackageManager())
-        .toString();
 
       String subscriptionTopic = topicUuid + "/" + appName + "/sync/event";
       mqttClient
