@@ -23,7 +23,11 @@ const Eventique = NativeModules.Eventique
       }
     );
 
-export const useEventiQueListener = () => {
+
+interface EventiQueListener {
+  apiKey: string
+}
+export const useEventiQueListener = ({apiKey}:EventiQueListener) => {
   const [message, setMessage] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -32,7 +36,7 @@ export const useEventiQueListener = () => {
 
     const connectToEventQueue = async () => {
       try {
-        await Eventique.connectToEventQueue(null);
+        await Eventique.connectToEventQueue(apiKey);
         setIsConnected(true);
 
         messageListener = DeviceEventEmitter.addListener(

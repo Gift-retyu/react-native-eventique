@@ -80,7 +80,7 @@ public class EventiqueModule extends ReactContextBaseJavaModule {
   String topicUuid = deviceId;
 
     if (apiKey != null && !apiKey.isEmpty()) {
-      String credentialsUrl = "https://fetch-my-creds.com";
+      String credentialsUrl = "https://eventique-publish.vercel.app/get-creds";
       try {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -97,7 +97,6 @@ public class EventiqueModule extends ReactContextBaseJavaModule {
           username = credentials.optString("username", username);
           password = credentials.optString("password", password);
           clientId = credentials.optString("clientId", clientId);
-          topicUuid = credentials.optString("topicUuid", clientId);
         }
       } catch (Exception e) {
         Log.e(

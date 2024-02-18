@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { useEventiQueListener } from 'eventique';
 
 export default function App() {
-  const [message, isConnected] = useEventiQueListener();
+  const [message, isConnected] = useEventiQueListener({apiKey:"xxxx"});
   console.log('message: ', message);
   console.log('isConnected: ', isConnected);
 
